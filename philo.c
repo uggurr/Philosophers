@@ -2,6 +2,7 @@
 
 void    *ft_thread_begin(void *philo)
 {
+    //deneme
 }
 
 void    ft_thread_creat(t_philo *philo)
