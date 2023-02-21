@@ -4,6 +4,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "sys/time.h"
 
 typedef struct s_struct
 {
@@ -29,4 +30,5 @@ int		ft_atoi(const char *nptr);
 void	get_arg(char **av, int ag, t_struct *str);
 void	identify_arg(t_philo *philo, t_struct *str);
 void	identify_fork(t_philo *philo, t_struct *str);
+void	create_thread(t_philo *philo);
 #endif
