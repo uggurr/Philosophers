@@ -11,6 +11,7 @@ int	main(int ag, char **av)
 		get_arg(av, ag, &str);
 		identify_arg(philo, &str);
 		identify_fork(philo, &str);
+		str.start = now_time();
 		create_thread(philo);
 	}
 	else

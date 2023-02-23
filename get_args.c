@@ -17,6 +17,16 @@ void	identify_fork(t_philo *philo, t_struct *str)
 			philo[i].right_fork = str->fork[i - 1];
 		i++;
 	}
+	i = 0;
+	while (i < str->number_of_philosophers)
+	{
+		pthread_mutex_init(&philo[i].left_fork, NULL);
+		pthread_mutex_init(&philo[i].right_fork, NULL);
+		i++;
+	}
+	pthread_mutex_init(&str->print, NULL);
+	pthread_mutex_init(&str->dead, NULL);
+	pthread_mutex_init(&str->eat, NULL);
 }
 
 void	identify_arg(t_philo *philo, t_struct *str)

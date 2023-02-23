@@ -4,6 +4,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "sys/time.h"
 
 typedef struct s_struct
@@ -13,22 +14,34 @@ typedef struct s_struct
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
+	int				is_dead;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	print;
+	pthread_mutex_t	eat;
+	pthread_mutex_t	dead;
+	long long int	start;
 }	t_struct;
 
 typedef struct s_philo
 {
 	int				id;
 	int				eat_count;
+	long long int	last_eat;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	right_fork;
 	pthread_t		th_philo;
 	t_struct		*str;
 }	t_philo;
 
-int		ft_atoi(const char *nptr);
-void	get_arg(char **av, int ag, t_struct *str);
-void	identify_arg(t_philo *philo, t_struct *str);
-void	identify_fork(t_philo *philo, t_struct *str);
+int				ft_atoi(const char *nptr);
+void			get_arg(char **av, int ag, t_struct *str);
+void			identify_arg(t_philo *philo, t_struct *str);
+void			identify_fork(t_philo *philo, t_struct *str);
+void			dead_value(t_philo *philo);
+int				is_dead(t_philo *philo);
+void			ft_write(t_philo *philo, char *str);
+void			ussleep(int y);
+long long int	now_time(void);
+long long int	ft_diff(long long int i);
 void	create_thread(t_philo *philo);
 #endif
