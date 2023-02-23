@@ -6,9 +6,11 @@ void	eating(t_philo *philo)
 	ft_write(philo, "fork has a taken");
 	pthread_mutex_lock(&philo->left_fork);
 	ft_write(philo, "fork has a taken");
+	pthread_mutex_lock(&philo->str->eat);
 	philo->last_eat = now_time();
 	philo->eat_count++;
-	ft_write(philo, "is sleeping");
+	pthread_mutex_unlock(&philo->str->eat);
+	ft_write(philo, "Is eating");
 	ussleep(philo->str->time_to_eat);
 	pthread_mutex_unlock(&philo->right_fork);
 	pthread_mutex_unlock(&philo->left_fork);
@@ -35,23 +37,61 @@ int	is_it_dead(t_philo *philo)
 	return (0);
 }
 
+int	are_they_eat(t_philo *philo)
+{
+	int	i;
+
+	if (philo->str->must_eat == -1)
+		return (0);
+	i = -1;
+	pthread_mutex_lock(&philo->str->eat);
+	while (++i < philo->str->number_of_philosophers)
+	{
+		if (philo[i].eat_count < philo->str->must_eat)
+		{
+			pthread_mutex_unlock(&philo->str->eat);
+			return (0);
+		}
+	}
+	pthread_mutex_unlock(&philo->str->eat);
+	dead_value(philo);
+	return (1);
+}
+
+int	all_cases(t_philo *philo)
+{
+	if (is_dead(philo) == 1 || are_they_eat(philo) == 1)
+		return (1);
+	return (0);
+}
+
 void	*routine(void *philo)
 {
-	while (1)
+	t_philo	*s_philo;
+
+	s_philo = (t_philo *)philo;
+	while (is_dead(philo) == 0)
 	{
 		eating(philo);
+		ft_write(s_philo, "Is sleaping");
+		ussleep(s_philo->str->time_to_sleep);
+		ft_write(s_philo, "Is thinking");
 	}
+	return (NULL);
 }
 
 void	create_thread(t_philo *philo)
 {
 	int	i;
+	int	x;
 
 	i = -1;
 	while (++i < philo->str->number_of_philosophers)
 		pthread_create(&philo[i].th_philo, NULL, routine, &philo[i]);
 	while (1)
 	{
-		//dhfskf;
+		x = all_cases(philo);
+		if (x == 1)
+			break ;
 	}
 }

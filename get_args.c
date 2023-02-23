@@ -52,5 +52,5 @@ void	get_arg(char **av, int ag, t_struct *str)
 	if (ag == 6)
 		str->must_eat = ft_atoi(av[5]);
 	else
-		str->must_eat = 0;
+		str->must_eat = -1;
 }

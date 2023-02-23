@@ -3,9 +3,8 @@
 long long int	now_time(void)
 {
 	struct timeval	tv;
-	struct timezone	tz;
 
-	gettimeofday(&tv, &tz);
+	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
@@ -19,6 +18,6 @@ void	ussleep(int y)
 	unsigned long	i;
 
 	i = now_time();
-	while (ft_diff(i) < y)
+	while ((int)ft_diff(i) < y)
 		usleep(100);
 }
