@@ -27,8 +27,8 @@ typedef struct s_philo
 	int				id;
 	int				eat_count;
 	long long int	last_eat;
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	pthread_t		th_philo;
 	t_struct		*str;
 }	t_philo;
@@ -43,5 +43,5 @@ void			ft_write(t_philo *philo, char *str);
 void			ussleep(int y);
 long long int	now_time(void);
 long long int	ft_diff(long long int i);
-void	create_thread(t_philo *philo);
+void			create_thread(t_philo *philo);
 #endif

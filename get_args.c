@@ -8,20 +8,18 @@ void	identify_fork(t_philo *philo, t_struct *str)
 	str->fork = malloc(sizeof(pthread_mutex_t) * str->number_of_philosophers);
 	while (i < str->number_of_philosophers)
 	{
-		philo[i].left_fork = str->fork[i];
+		philo[i].left_fork = &str->fork[i];
 		if (i == 0)
-		{
-			philo[i].right_fork = str->fork[str->number_of_philosophers - 1];
-		}
+			philo[i].right_fork = &str->fork[str->number_of_philosophers - 1];
 		else
-			philo[i].right_fork = str->fork[i - 1];
+			philo[i].right_fork = &str->fork[i - 1];
 		i++;
 	}
 	i = 0;
 	while (i < str->number_of_philosophers)
 	{
-		pthread_mutex_init(&philo[i].left_fork, NULL);
-		pthread_mutex_init(&philo[i].right_fork, NULL);
+		pthread_mutex_init(philo[i].left_fork, NULL);
+		pthread_mutex_init(philo[i].right_fork, NULL);
 		i++;
 	}
 	pthread_mutex_init(&str->print, NULL);
@@ -38,6 +36,7 @@ void	identify_arg(t_philo *philo, t_struct *str)
 	{
 		philo[i].id = i;
 		philo[i].eat_count = 0;
+		philo[i].last_eat = now_time();
 		philo[i].str = str;
 		i++;
 	}

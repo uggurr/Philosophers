@@ -2,9 +2,9 @@
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->right_fork);
+	pthread_mutex_lock(philo->right_fork);
 	ft_write(philo, "fork has a taken");
-	pthread_mutex_lock(&philo->left_fork);
+	pthread_mutex_lock(philo->left_fork);
 	ft_write(philo, "fork has a taken");
 	pthread_mutex_lock(&philo->str->eat);
 	philo->last_eat = now_time();
@@ -12,8 +12,8 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->str->eat);
 	ft_write(philo, "Is eating");
 	ussleep(philo->str->time_to_eat);
-	pthread_mutex_unlock(&philo->right_fork);
-	pthread_mutex_unlock(&philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
 }
 
 int	is_it_dead(t_philo *philo)
@@ -32,7 +32,6 @@ int	is_it_dead(t_philo *philo)
 			return (1);
 		}
 		pthread_mutex_unlock(&philo->str->eat);
-
 	}
 	return (0);
 }
@@ -60,7 +59,7 @@ int	are_they_eat(t_philo *philo)
 
 int	all_cases(t_philo *philo)
 {
-	if (is_dead(philo) == 1 || are_they_eat(philo) == 1)
+	if (is_it_dead(philo) == 1 || are_they_eat(philo) == 1)
 		return (1);
 	return (0);
 }
@@ -70,9 +69,11 @@ void	*routine(void *philo)
 	t_philo	*s_philo;
 
 	s_philo = (t_philo *)philo;
-	while (is_dead(philo) == 0)
+	if (s_philo->id % 2 == 1)
+		usleep(10000);
+	while (is_dead(s_philo) == 0)
 	{
-		eating(philo);
+		eating(s_philo);
 		ft_write(s_philo, "Is sleaping");
 		ussleep(s_philo->str->time_to_sleep);
 		ft_write(s_philo, "Is thinking");
