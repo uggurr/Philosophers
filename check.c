@@ -10,12 +10,8 @@ int	atoi_check(int ag, char **av)
 	{
 
 		tmp = ft_atoi(av[i]);
-		printf("%ld\n",tmp);
 		if (tmp > 2147483647 || tmp < -2147483648)
-        {
-            printf("merhaba");
 			return (1);
-        }
 	}
 	return (0);
 }

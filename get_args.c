@@ -46,13 +46,8 @@ void	get_arg(char **av, int ag, t_struct *str)
 {
 	if (check(ag,av))
 		exit (0);
-	printf("%d\n",ag);
-	printf("%s\n",av[2]);
 	if (atoi_check(ag,av))
-	{
-		printf("Denemee");
 		exit (0);
-	}
 	str->number_of_philosophers = ft_atoi(av[1]);
 	if (str->number_of_philosophers == 0)
 		exit (0);
