@@ -69,7 +69,8 @@ void	*routine(void *philo)
 	t_philo	*s_philo;
 
 	s_philo = (t_philo *)philo;
-	if (s_philo->id % 2 == 1)
+	s_philo->str->is_dead = 0;
+	if (s_philo->id % 2 == 0)
 		usleep(10000);
 	while (is_dead(s_philo) == 0)
 	{
