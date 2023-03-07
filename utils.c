@@ -1,8 +1,8 @@
 #include "philo.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(char *nptr)
 {
-	long	i;
+	int	i;
 	long	mark;
 	long	value;
 
@@ -14,16 +14,12 @@ int	ft_atoi(const char *nptr)
 	if (nptr[i] == '+' || nptr[i] == '-')
 	{
 		if (nptr[i] == '-')
-			mark *= -1;
+			mark = -1;
 		i++;
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		value = (value * 10) + (nptr[i] - '0');
-		if (value * mark < -2147483648)
-			return (0);
-		else if (value * mark > 2147483647)
-			return (-1);
+		value = value * 10 + nptr[i] - '0';
 		i++;
 	}
 	return (value * mark);

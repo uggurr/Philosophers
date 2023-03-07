@@ -2,7 +2,8 @@ NAME:= philo
 CC:= gcc
 FLAGS:= -Wall -Wextra -Werror
 
-SRCS   :=      dead.c \
+SRCS   :=  check.c \
+           dead.c \
            get_args.c \
            philo.c \
            threads.c \

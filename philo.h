@@ -33,7 +33,7 @@ typedef struct s_philo
 	t_struct		*str;
 }	t_philo;
 
-int				ft_atoi(const char *nptr);
+long				ft_atoi(char *nptr);
 void			get_arg(char **av, int ag, t_struct *str);
 void			identify_arg(t_philo *philo, t_struct *str);
 void			identify_fork(t_philo *philo, t_struct *str);
@@ -44,4 +44,6 @@ void			ussleep(int y);
 long long int	now_time(void);
 long long int	ft_diff(long long int i);
 void			create_thread(t_philo *philo);
+int     		check(int ag, char **av);
+int				atoi_check(int ag, char **av);
 #endif
