@@ -1,6 +1,6 @@
 NAME:= philo
 CC:= gcc
-FLAGS:= -Wall -Wextra -Werror
+FLAGS:= -Wall -Wextra -Werror -fsanitize=thread -g
 
 SRCS   :=  check.c \
            dead.c \

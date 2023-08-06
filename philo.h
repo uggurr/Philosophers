@@ -5,7 +5,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "sys/time.h"
+# include <sys/time.h>
 
 typedef struct s_struct
 {
@@ -34,16 +34,16 @@ typedef struct s_philo
 }	t_philo;
 
 long				ft_atoi(char *nptr);
-void			get_arg(char **av, int ag, t_struct *str);
-void			identify_arg(t_philo *philo, t_struct *str);
-void			identify_fork(t_philo *philo, t_struct *str);
-void			dead_value(t_philo *philo);
-int				is_dead(t_philo *philo);
-void			ft_write(t_philo *philo, char *str);
-void			ussleep(int y);
-long long int	now_time(void);
-long long int	ft_diff(long long int i);
-void			create_thread(t_philo *philo);
-int     		check(int ag, char **av);
-int				atoi_check(int ag, char **av);
+t_struct			*get_arg(char **av, int ag);
+t_philo				*identify_arg(t_struct *str);
+void				identify_fork(t_philo *philo, t_struct *str);
+void				dead_value(t_philo *philo);
+int					is_dead(t_philo *philo);
+void				ft_write(t_philo *philo, char *str);
+void				ussleep(int y);
+long long int		now_time(void);
+long long int		ft_diff(long long int i);
+void				create_thread(t_philo *philo);
+int     			check(int ag, char **av);
+int					atoi_check(int ag, char **av);
 #endif
