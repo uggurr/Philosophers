@@ -14,9 +14,10 @@ void	eating(t_philo *philo)
 	ft_write(philo, "fork has a taken");
 	pthread_mutex_lock(&philo->str->eat);
 	philo->last_eat = now_time();
+	if(philo->eat_count < philo->str->must_eat)
+	ft_write(philo, "Is eating");
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->str->eat);
-	ft_write(philo, "Is eating");
 	ussleep(philo->str->time_to_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
@@ -94,7 +95,9 @@ void	create_thread(t_philo *philo)
 
 	i = -1;
 	while (++i < philo->str->number_of_philosophers)
+	{
 		pthread_create(&philo[i].th_philo, NULL, routine, &philo[i]);
+	}
 	//getchar();
 	while (1)
 	{
